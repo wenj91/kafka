@@ -59,6 +59,10 @@ public class Date {
             throw new DataException("Requested conversion of Date object but the schema does not match.");
         Calendar calendar = Calendar.getInstance(UTC);
         calendar.setTime(value);
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
         if (calendar.get(Calendar.HOUR_OF_DAY) != 0 || calendar.get(Calendar.MINUTE) != 0 ||
                 calendar.get(Calendar.SECOND) != 0 || calendar.get(Calendar.MILLISECOND) != 0) {
             throw new DataException("Kafka Connect Date type should not have any time fields set to non-zero values.");
